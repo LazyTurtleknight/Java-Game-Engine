@@ -12,7 +12,7 @@ public class GameContainer implements Runnable{
     private final double UPDATE_CAP = 1.0/60.0; // frame cap
     private int width = 320, height = 240;
     private float scale = 4f;
-    private String title = "Engine";
+    private String title = "Java Engine";
 
     public GameContainer(AbstractGame game) {
     	
