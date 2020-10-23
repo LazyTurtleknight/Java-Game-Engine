@@ -5,17 +5,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Image {
+public class Sprite {
 
 	private int width, height;
 	private int[] pixels;
 	
-	public Image(String path) {
+	public Sprite(String path) {
 		
 		BufferedImage image = null;
 		
 		try {
-			image = ImageIO.read(Image.class.getResourceAsStream(path));
+			image = ImageIO.read(Sprite.class.getResourceAsStream(path));
 		}
 		catch(IOException err) {
 			err.printStackTrace();

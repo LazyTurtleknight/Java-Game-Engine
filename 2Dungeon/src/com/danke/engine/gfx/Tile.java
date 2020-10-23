@@ -1,6 +1,6 @@
 package com.danke.engine.gfx;
 
-public class Tile extends Image{
+public class Tile extends Sprite{
 
 	private int posX;
 	private int posY;

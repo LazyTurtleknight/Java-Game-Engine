@@ -2,7 +2,7 @@ package com.danke.engine;
 
 import java.awt.image.DataBufferInt;
 
-import com.danke.engine.gfx.Image;
+import com.danke.engine.gfx.Sprite;
 import com.danke.engine.gfx.Tile;
 
 public class Renderer{
@@ -42,7 +42,7 @@ public class Renderer{
     	pixels[pixelWidth * y + x] =  value;
     }
     
-    public void drawImage(Image image, int offsetX, int offsetY){
+    public void drawImage(Sprite image, int offsetX, int offsetY){
     	
     	//if the image would be outside of the window
     	if(offsetX < -image.getWidth() || offsetY < -image.getHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {

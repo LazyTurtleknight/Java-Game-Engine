@@ -5,15 +5,15 @@ import java.awt.event.KeyEvent;
 import com.danke.engine.AbstractGame;
 import com.danke.engine.GameContainer;
 import com.danke.engine.Renderer;
-import com.danke.engine.gfx.Image;
+import com.danke.engine.gfx.Sprite;
 
 public class GameHandler extends AbstractGame{
 
-	private Image image;
+	private Sprite image;
 	
 	public GameHandler() {
 		
-		image = new Image("/images/blueExplosion.png");
+		image = new Sprite("/images/blueExplosion.png");
 	}
 	@Override
 	public void update(GameContainer gamecon, float deltatime) {
