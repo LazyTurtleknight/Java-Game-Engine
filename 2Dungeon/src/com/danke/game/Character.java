@@ -1,5 +1,7 @@
 package com.danke.game;
 
+import com.danke.engine.gfx.Sprite;
+
 public class Character {
 
 	private int offsetX;

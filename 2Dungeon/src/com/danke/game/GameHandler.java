@@ -5,15 +5,15 @@ import java.awt.event.KeyEvent;
 import com.danke.engine.AbstractGame;
 import com.danke.engine.GameContainer;
 import com.danke.engine.Renderer;
-import com.danke.engine.gfx.Sprite;
+import com.danke.engine.gfx.SpriteAnimation;
 
 public class GameHandler extends AbstractGame{
 
-	private Sprite image;
+	private SpriteAnimation image;
 	
 	public GameHandler() {
 		
-		image = new Sprite("/images/blueExplosion.png");
+		image = new SpriteAnimation("/images/animation.png", 16, 16);
 	}
 	@Override
 	public void update(GameContainer gamecon, float deltatime) {
@@ -22,13 +22,18 @@ public class GameHandler extends AbstractGame{
 
 			System.out.println("A was pressed");
 		}
+		delta += deltatime;
+		if(delta > 4) {
+			delta=0;
+		}
 		
 	}
 
+	float delta;
 	@Override
 	public void render(GameContainer gamecon, Renderer rend) {
 		
-		rend.drawImage(image, gamecon.getInput().getMouseX() - image.getWidth()/2, gamecon.getInput().getMouseY()- image.getHeight()/2);
+		rend.drawSpriteAnimation(image, gamecon.getInput().getMouseX(), gamecon.getInput().getMouseY(), (int) delta, 0);
 		
 	}
 
