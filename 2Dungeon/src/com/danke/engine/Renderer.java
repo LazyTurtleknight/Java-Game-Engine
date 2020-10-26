@@ -3,7 +3,7 @@ package com.danke.engine;
 import java.awt.image.DataBufferInt;
 
 import com.danke.engine.gfx.Sprite;
-import com.danke.engine.gfx.Tile;
+import com.danke.engine.gfx.SpriteAnimation;
 
 public class Renderer{
 
@@ -42,7 +42,7 @@ public class Renderer{
     	pixels[pixelWidth * y + x] =  value;
     }
     
-    public void drawImage(Sprite image, int offsetX, int offsetY){
+    public void drawSprite(Sprite image, int offsetX, int offsetY){
     	
     	//if the image would be outside of the window
     	if(offsetX < -image.getWidth() || offsetY < -image.getHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {
@@ -87,9 +87,11 @@ public class Renderer{
     	}
     }
     
-    public void drawTile(Tile tile, int tileWidth, int tileHeight, int offsetX, int offsetY) {
+    //parameter image is a sprite animation containing multiple sprites in a grid
+    //parameter spriteX and spriteY specify the coordinates of the sprite in the grid
+    public void drawSpriteAnimation(SpriteAnimation image, int offsetX, int offsetY, int spriteX, int spriteY) {
     	//if the image would be outside of the window
-    	if(offsetX < -tile.getTileWidth() || offsetY < -tile.getTileHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {
+    	if(offsetX < -image.getSpriteWidth() || offsetY < -image.getSpriteHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {
     		
     		return;
     	}
@@ -99,8 +101,8 @@ public class Renderer{
     	//TODO: more clarification of how this works ?
     	int newX = 0;
     	int newY = 0;
-    	int newWidth = tile.getTileWidth();
-    	int newHeight = tile.getTileHeight();
+    	int newWidth = image.getSpriteWidth();
+    	int newHeight = image.getSpriteHeight();
     	
     	if(offsetX < 0) {
     		
@@ -126,8 +128,11 @@ public class Renderer{
     		
     		for(int x  = newX; x < newWidth; x++) {
     			
-    			setPixel(x + offsetX, y + offsetY, tile.getPixels()[x + y *tile.getWidth()]);
+    			
+    			setPixel(x + offsetX, y + offsetY, image.getPixels()[x + spriteX * image.getSpriteWidth() +
+    			                                                     (y + spriteY * image.getSpriteHeight())
+    			                                                      *image.getWidth()]);
     		}
-    	}
+    	}	
     }
 }
