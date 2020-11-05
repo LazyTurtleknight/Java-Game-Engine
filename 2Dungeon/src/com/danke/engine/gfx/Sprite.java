@@ -27,7 +27,34 @@ public class Sprite {
 		//TODO: what does this do?
 		image.flush();
 	}
+	
+	public Sprite(BufferedImage image) {
+		
+		width = image.getWidth();
+		height = image.getHeight();
+		pixels = image.getRGB(0, 0, width, height, null, 0, width);
+		
+		//TODO: what does this do?
+		image.flush();
+	}
+	
+	//TODO: one of these two constructor is probably superfluous
+	public Sprite(int[] pixels, int width, int height) {
+		
+		this.width = width;
+		this.height = height; 
+		this.pixels = pixels;
+		
+	}
 
+	public Sprite(Sprite sprite) {
+		
+		width = sprite.getWidth();
+		height = sprite.getHeight(); 
+		pixels = sprite.getPixels();
+		
+	}	
+	
 	//getter and setter
 	public int getWidth() {
 		return width;
