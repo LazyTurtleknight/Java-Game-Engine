@@ -1,37 +1,26 @@
 package com.danke.engine.gfx;
 
-public class SpriteAnimation extends Sprite {
+public class SpriteAnimation extends SpriteSheet {
 	
-	//may be removed?
-	private int numberOfFrame;
-	
-	//width and height of the sprites froming the animation
-	private int spriteWidth, spriteHeight;
-	
-	//loads an image of multiple sprite that form the animation
-	public SpriteAnimation(String path,int spriteW, int spriteH) {
-		super(path);
-		spriteWidth = spriteW;
-		spriteHeight = spriteH;
+	//may not be needed ?
+	private int numberOfFrames;
 
+	//loads an image of multiple sprite that form the animation
+	public SpriteAnimation(String path,int spriteWidth, int spriteHeight) {
+		super(path, spriteWidth, spriteHeight);
+
+		//TODO: check if this is even division
+		this.numberOfFrames = this.getHeight()/spriteHeight * this.getWidth()/spriteWidth;
 		
 	}
 	
 	//getter and setter
-	public int getSpriteWidth() {
-		return spriteWidth;
+	public int getNumberOfFrames() {
+		return numberOfFrames;
 	}
 
-	public void setSpriteWidth(int spriteWidth) {
-		this.spriteWidth = spriteWidth;
-	}
-
-	public int getSpriteHeight() {
-		return spriteHeight;
-	}
-
-	public void setSpriteHeight(int spriteHeight) {
-		this.spriteHeight = spriteHeight;
+	public void setNumberOfFrames(int numberOfFrames) {
+		this.numberOfFrames = numberOfFrames;
 	}
 	
 }
