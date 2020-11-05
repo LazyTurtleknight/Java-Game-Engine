@@ -87,6 +87,56 @@ public class Renderer{
     	}
     }
     
+    
+    //parameter image is a sprite animation containing multiple sprites in a grid
+    //parameter spriteID is the ID of the sprite in the sprite array
+    public void drawSpriteAnimation(SpriteAnimation image, int offsetX, int offsetY, int spriteID) {
+    	//if the image would be outside of the window
+    	if(offsetX < -image.getSpriteWidth() || offsetY < -image.getSpriteHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {
+    		
+    		return;
+    	}
+    	
+    	//if only parts of the image are outside of the window 
+    	//calculate new width and height to skip unnecessary setPixel(...) function calls
+    	//TODO: more clarification of how this works ?
+    	int newX = 0;
+    	int newY = 0;
+    	int newWidth = image.getSpriteWidth();
+    	int newHeight = image.getSpriteHeight();
+    	
+    	if(offsetX < 0) {
+    		
+    		newX -= offsetX;
+    	}
+    	
+    	if(offsetY < 0) {
+    		
+    		newY -= offsetY;
+    	}
+    	
+    	if(newWidth + offsetX >= pixelWidth){
+    		
+    		newWidth -= newWidth + offsetX - pixelWidth;
+    	}
+    	
+    	if(newHeight + offsetY >= pixelHeight){
+    		
+    		newHeight -= newHeight + offsetY - pixelHeight;
+    	}
+    	
+    	Sprite sprite = image.getLoadedSprites()[spriteID];
+    	
+    	for(int y = newY; y < newHeight; y++) {
+    		
+    		for(int x  = newX; x < newWidth; x++) {
+    			
+    			
+    			setPixel(x + offsetX, y + offsetY, sprite.getPixels()[x + y *sprite.getWidth()]);
+    		}
+    	}	
+    }
+    
     //parameter image is a sprite animation containing multiple sprites in a grid
     //parameter spriteX and spriteY specify the coordinates of the sprite in the grid
     public void drawSpriteAnimation(SpriteAnimation image, int offsetX, int offsetY, int spriteX, int spriteY) {
