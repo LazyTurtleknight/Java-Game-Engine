@@ -189,6 +189,7 @@ public class Renderer{
     }
     
     //draw a simple rectangle
+    //TODO: add check if rectangle is in window
     public void drawRect(int offsetX, int offsetY, int width, int height, int color) {
   
     	//draws top and bottom
