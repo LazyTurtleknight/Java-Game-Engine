@@ -1,6 +1,8 @@
 package com.danke.engine;
 
 import java.awt.image.DataBufferInt;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import com.danke.engine.gfx.Sprite;
 import com.danke.engine.gfx.SpriteAnimation;
@@ -184,5 +186,123 @@ public class Renderer{
     			                                                      *image.getWidth()]);
     		}
     	}	
+    }
+    
+    //draw a simple rectangle
+    public void drawRect(int offsetX, int offsetY, int width, int height, int color) {
+  
+    	//draws top and bottom
+    	for(int x = 0; x<width;x++) {
+    		setPixel(offsetX +x, offsetY, color);
+    		setPixel(offsetX +x, offsetY+height-1, color);
+    	}
+    	
+    	//draws left and right
+    	for(int y = 0; y<height;y++) {
+    		setPixel(offsetX , y+ offsetY, color);
+    		setPixel(offsetX+width-1 , y+ offsetY, color);
+    	}
+    }
+
+  
+    //only draws vertical or horizontal lines
+    public void drawStraightLine(int offsetX, int offsetY, int endpointX, int endpointY, int color) {
+    	
+    	//check if the points lie on a vertical or horizontal line
+    	if(endpointX != offsetX && endpointY != offsetY) {
+    		return;
+    	}
+    	
+    	int distance = 0;
+
+    	if(endpointX > offsetX || endpointY > offsetY) {
+    		//one of the summands will be zero
+    		distance = endpointX-offsetX + endpointY-offsetY;
+    		//x is only incremented if endpointX and offsetX are different from each other, work for y respectively
+    		//starts at offset and draws point toward endpoint
+        	for(int x = 0,y = 0; x < distance && y < distance;x+=(endpointX-offsetX)/distance,y+=(endpointY-offsetY)/distance) {
+        		setPixel(offsetX+x, offsetY+y, color);
+        	}
+    	}else{
+    		distance = offsetX-endpointX + offsetY-endpointY;
+    		//starts at endpoint and draws point toward offset
+        	for(int x = 0, y = 0; x < distance && y < distance;x+=(offsetX-endpointX)/distance,y+=(offsetY-endpointY)/distance) {
+        		setPixel(offsetX-x, offsetY-y, color);
+        	}	
+    	}
+    }
+    
+    
+    //draws a rectangle with chosen borderline
+    public void drawRectwithBorderline(int offsetX, int offsetY, int width, int height, int borderline, int color) {
+    	
+    	//starts by drawing a rectangle with borderline 1 and then continues by drawing smaller rectangle in it
+    	for(int borderwidth = 0; borderwidth < borderline; borderwidth++) {
+    		drawRect(offsetX, offsetY, width, height, color);
+    		//values for the next rectangle
+    		offsetX++;
+    		offsetY++;
+    		width-=2;
+    		height-=2;
+    	}
+    	
+    }
+    
+    //yes, this is probably superfluous but it was fun to code : D
+    //...and maybe in a distance piece of code this becomes useful
+    //TODO: fix pls
+    public void drawRectAsSpiral(int offsetX, int offsetY, int width, int height, int borderline, int color) {
+    
+    	// borderline is not valid
+    	if(borderline<1 || borderline>=height/2+1) {
+    		return;
+    	}
+    	
+    	int x=0;
+    	int y=0;
+    	
+    	Function<Integer,Integer> lambdax = parameter -> {return parameter+1;};
+    	Function<Integer,Integer> lambday = parameter -> {return parameter+1;};
+    	
+    	BiFunction<Integer,Integer,Boolean> condx = (parameter1,parameter2) -> {return parameter1<parameter2-1;};
+    	BiFunction<Integer,Integer,Boolean> condy = (parameter1,parameter2) -> {return parameter1<parameter2-1;};   	
+    	
+    	int boarderwidth=0;
+    	
+    	for(;condy.apply(y,height);y = lambday.apply(y)) {
+        	
+        	setPixel(offsetX+x,offsetY+y, color);
+        	
+    		if(x==width-1 && lambday.apply(y)==height-1){
+    			
+        		lambday = parameter -> {return parameter-1;};
+        		condy = (parameter1,parameter2) -> {return parameter1>0;};
+        		
+    			lambdax = parameter -> {return parameter-1;};
+    			condx = (parameter1,parameter2) -> {return parameter1>0;};
+    		}
+        	
+    		
+        	for(;condx.apply(x,width);x = lambdax.apply(x)) {
+    			
+        		setPixel(offsetX+x,offsetY+y, color);
+        		
+        	}
+    		
+        	if(x==0 && lambday.apply(y)==0) {
+        		if(boarderwidth==borderline) {
+        			return;
+        		}
+            	//condx = (parameter1,parameter2) -> {return parameter1<=parameter2-1;};
+            	//condy = (parameter1,parameter2) -> {return parameter1<=parameter2-1;}; 
+    			offsetX++;
+    			offsetY++;
+    			x-=2;
+    			y-=2;
+    			width-=2;
+    			height-=2;
+    			boarderwidth++;
+        	}
+    	}
     }
 }
