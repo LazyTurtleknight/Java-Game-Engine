@@ -35,11 +35,11 @@ public class SpriteSheet extends Sprite {
 		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
 		image.setRGB(0, 0, this.getWidth(), this.getHeight(), this.getPixels(), 0, this.getWidth());
 		
-		for(int y = 0; y<this.getWidth(); y += spriteHeight) {
-			for(int x = 0; x<this.getHeight(); x += spriteWidth) {
+		for(int y = 0; y<this.getHeight(); y += spriteHeight) {
+			for(int x = 0; x<this.getWidth(); x += spriteWidth) {
 
 				spritePixels = image.getRGB(x, y, spriteWidth, spriteHeight, null, 0, spriteWidth);
-				loadedSprites[spriteID] = new Sprite(spritePixels,spriteWidth,spriteHeight);
+				loadedSprites[spriteID] = new Sprite(spritePixels, spriteWidth, spriteHeight);
 				spriteID++;
 				
 			}

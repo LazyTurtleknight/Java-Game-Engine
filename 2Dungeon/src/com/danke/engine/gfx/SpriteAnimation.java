@@ -6,7 +6,7 @@ public class SpriteAnimation extends SpriteSheet {
 	private int numberOfFrames;
 
 	//loads an image of multiple sprite that form the animation
-	public SpriteAnimation(String path,int spriteWidth, int spriteHeight) {
+	public SpriteAnimation(String path, int spriteWidth, int spriteHeight) {
 		super(path, spriteWidth, spriteHeight);
 
 		//TODO: check if this is even division
