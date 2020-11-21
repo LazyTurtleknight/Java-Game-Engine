@@ -1,13 +1,24 @@
 package com.danke.game;
 
+import com.danke.engine.GameContainer;
+import com.danke.engine.Renderer;
 import com.danke.engine.gfx.Sprite;
+import com.danke.engine.gfx.SpriteAnimation;
 
-public class BasicCharacter {
+public class BasicCharacter implements GameObject {
 
 	private int offsetX;
 	private int offsetY;
 	private Sprite sprite;
-	private String name;	
+	private String name;
+	
+	//used to determine which animation has to used
+	private Boolean idle = true;
+	//keeps track of which frame has to be rendered
+	private double delta = 0; 
+	private SpriteAnimation idleAnimation;
+	private SpriteAnimation runAnimation;
+	private SpriteAnimation hitAnimation;
 
 	public BasicCharacter(Sprite sprite, int offsetX, int offsetY) {
 		
@@ -16,21 +27,33 @@ public class BasicCharacter {
 		this.sprite = sprite;
 		
 	}
-	
-	public void moveUp() {
-		offsetY--;
-	}
 
-	public void moveDown() {
-		offsetY++;
-	}
-
-	public void moveRight() {
-		offsetX++;
+	public void render(Renderer renderer, int zoomX, int zoomY) {
+		
 	}
 	
-	public void moveLeft() {
-		offsetX--;
+	public void update(GameContainer game) {
+		
+	}
+	
+	public void moveUp(int steps) {
+		offsetY-=steps;
+	}
+
+	public void moveDown(int steps) {
+		offsetY+=steps;
+	}
+
+	public void moveRight(int steps) {
+		offsetX+=steps;
+	}
+	
+	public void moveLeft(int steps) {
+		offsetX-=steps;
+	}
+	
+	public void incrementDelta(double inc) {
+		this.delta +=inc;
 	}
 
 	//getter and setter
@@ -60,5 +83,45 @@ public class BasicCharacter {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public SpriteAnimation getIdleAnimation() {
+		return idleAnimation;
+	}
+
+	public void setIdleAnimation(SpriteAnimation idleAnimation) {
+		this.idleAnimation = idleAnimation;
+	}
+
+	public SpriteAnimation getRunAnimation() {
+		return runAnimation;
+	}
+
+	public void setRunAnimation(SpriteAnimation runAnimation) {
+		this.runAnimation = runAnimation;
+	}
+
+	public SpriteAnimation getHitAnimation() {
+		return hitAnimation;
+	}
+
+	public void setHitAnimation(SpriteAnimation hitAnimation) {
+		this.hitAnimation = hitAnimation;
+	}
+
+	public Boolean getIdle() {
+		return idle;
+	}
+
+	public void setIdle(Boolean idle) {
+		this.idle = idle;
+	}
+
+	public double getDelta() {
+		return delta;
+	}
+
+	public void setDelta(int delta) {
+		this.delta = delta;
 	}
 }
