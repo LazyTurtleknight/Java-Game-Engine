@@ -17,6 +17,7 @@ public class GameContainer implements Runnable{
     public GameContainer(AbstractGame game) {
     	
     	this.game = game;
+
     }
     
     public void start(){
@@ -74,7 +75,6 @@ public class GameContainer implements Runnable{
                 //update
                 game.update(this, (float) UPDATE_CAP);
                 input.update();
-                
             }
 
             //only render if there is an update
@@ -109,7 +109,6 @@ public class GameContainer implements Runnable{
     }
 
     //getter and setter
-
     public void setWidth(int width){
         this.width = width;
     }
@@ -144,5 +143,9 @@ public class GameContainer implements Runnable{
 
 	public Input getInput() {
 		return input;
+	}
+
+	public double getUPDATE_CAP() {
+		return UPDATE_CAP;
 	}
 }

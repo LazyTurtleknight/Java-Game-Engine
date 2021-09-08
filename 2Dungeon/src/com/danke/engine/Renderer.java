@@ -4,6 +4,7 @@ import java.awt.image.DataBufferInt;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import com.danke.engine.gfx.Font;
 import com.danke.engine.gfx.Sprite;
 import com.danke.engine.gfx.SpriteAnimation;
 
@@ -11,7 +12,15 @@ public class Renderer{
 
     private int pixelWidth, pixelHeight;
     private int[] pixels;
+    
+    private Font font;
+    
+    //used to buffer alpha values
+    private int[] zbuffer;
 
+    //TODO: what does this do 
+    private int zDepth = 0;
+    
     public Renderer(GameContainer gamecon){
 
         pixelWidth = gamecon.getWidth();
@@ -23,6 +32,9 @@ public class Renderer{
         //databuffer of raster
         //int[] reference to buffered pix array
         pixels =  ((DataBufferInt)gamecon.getWindow().getImage().getRaster().getDataBuffer()).getData();
+        zbuffer = new int[pixels.length];
+        // default font
+        font = new Font("/images/Fonts/FreeSans.png");
     }
 
     public void clear(){
@@ -30,18 +42,48 @@ public class Renderer{
         for(int i = 0; i < pixels.length;i++){
 
             pixels[i] = 0;
+            zbuffer[i] = 0; 
         }
     }
     
+    // value is 4 byte int (ARGB color) where 1. byte is alpha, 2.byte red, 3. byte green, 4. byte blue
     public void setPixel(int x, int y, int value) {
     	
-    	// add invisible color ? value == 0x.....
-    	//if coordinates are out of bounds
-    	if(x < 0 || x >= pixelWidth || y < 0 ||  y >= pixelHeight) {
+    	//value gets shifted to the right by 24 bits
+    	//preserving the sign
+    	//0xff is an int literal: 00 00 00 ff
+    	//after bitwise AND
+    	//result is positive int of the 8 most significant bits in value (before the shift)
+    	int alpha = (value >> 24) & 0xff;
+    	
+    	if(x < 0 || x >= pixelWidth || y < 0 ||  y >= pixelHeight || alpha == 0) {
     		
     		return;
     	}
-    	pixels[pixelWidth * y + x] =  value;
+    	
+    	//TODO: clarification
+    	if(zbuffer[pixelWidth * y + x] > zDepth) {
+    		return;
+    	}
+    	
+    	if(alpha == 255) {
+    		pixels[pixelWidth * y + x] =  value;
+    	}else {
+    		//calculate new color
+    		int pixelColor = pixels[pixelWidth * y + x];
+    		
+    		// newcolor = aplha * A + (1-alpha) * B
+    		// newcolor = aplha * A - alpha * B + B
+    		// newcolor = B - alpha * (B-A)
+    		int newRed   = ((pixelColor >> 16) & 0xff) - (int) ((((pixelColor >> 16) & 0xff) - ((value >> 16) & 0xff)) * (alpha / 255f));
+    		int newGreen = ((pixelColor >>  8) & 0xff) - (int) ((((pixelColor >>  8) & 0xff) - ((value >>  8) & 0xff)) * (alpha / 255f));
+    		int newBlue  =  (pixelColor        & 0xff) - (int) ((( pixelColor        & 0xff) - ( value        & 0xff)) * (alpha / 255f));
+    		
+    		pixels[pixelWidth * y + x] = (255 << 24| newRed << 16 | newGreen << 8 | newBlue);
+    		
+    		
+    	}
+    	
     }
     
     public void drawSprite(Sprite image, int offsetX, int offsetY){
@@ -89,6 +131,32 @@ public class Renderer{
     	}
     }
     
+    //
+    public void drawText(String text, int offsetX, int offsetY, int color) {
+    	
+    	int offset = 0;
+    	
+    	for (int i = 0; i < text.length(); i++) {
+    		
+    		int unicode = text.codePointAt(i);
+    		
+    		for(int y = 0; y < font.getFontImage().getHeight(); y++) {
+    		
+        		for(int x = 0; x < font.getWidths()[unicode]; x++) {
+        			
+        			// character fonts are rectangular shaped parts of the fontImage with every pixel being transparent except for
+        			// the pixels forming the character (black) and top left (pink) and top right (pink) corner
+        			// this checks if a pixel of a character is black and if so sets it
+        			if(font.getFontImage().getPixels()[x +  font.getOffsets()[unicode] + y * font.getFontImage().getWidth()] == 0xffffffff) {
+        				
+        				this.setPixel(offsetX + x + offset, offsetY + y, color);
+        			}
+        		}
+    		}
+    		
+    		offset += font.getWidths()[unicode];
+    	}
+    }
     
     //parameter image is a sprite animation containing multiple sprites in a grid
     //parameter spriteID is the ID of the sprite in the sprite array
@@ -306,4 +374,13 @@ public class Renderer{
         	}
     	}
     }
+
+    // getter and setter
+	public Font getFont() {
+		return font;
+	}
+
+	public void setFont(Font font) {
+		this.font = font;
+	}
 }

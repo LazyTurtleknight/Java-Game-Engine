@@ -67,4 +67,8 @@ public class Sprite {
 	public int[] getPixels() {
 		return pixels;
 	}
+	
+	public void setPixels(int[] pixels) {
+		this.pixels = pixels;
+	}
 }
