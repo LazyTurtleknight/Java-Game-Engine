@@ -1,6 +1,6 @@
-package com.danke.game;
+package com.game;
 
-import com.danke.engine.gfx.Sprite;
+import com.engine.gfx.Sprite;
 
 public class BasicObject {
 	private int offsetX;

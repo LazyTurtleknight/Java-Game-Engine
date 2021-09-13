@@ -1,9 +1,9 @@
-package com.danke.game;
+package com.game;
 
-import com.danke.engine.GameContainer;
-import com.danke.engine.Renderer;
-import com.danke.engine.gfx.Sprite;
-import com.danke.engine.gfx.SpriteAnimation;
+import com.engine.GameContainer;
+import com.engine.Renderer;
+import com.engine.gfx.Sprite;
+import com.engine.gfx.SpriteAnimation;
 
 public class Player extends BasicCharacter{
 	

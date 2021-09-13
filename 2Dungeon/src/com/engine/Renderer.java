@@ -1,12 +1,13 @@
-package com.danke.engine;
+package com.engine;
 
 import java.awt.image.DataBufferInt;
+
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import com.danke.engine.gfx.Font;
-import com.danke.engine.gfx.Sprite;
-import com.danke.engine.gfx.SpriteAnimation;
+import com.engine.gfx.Font;
+import com.engine.gfx.Sprite;
+import com.engine.gfx.SpriteAnimation;
 
 public class Renderer{
 

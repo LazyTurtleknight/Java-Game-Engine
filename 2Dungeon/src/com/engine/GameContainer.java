@@ -1,4 +1,4 @@
-package com.danke.engine;
+package com.engine;
 
 public class GameContainer implements Runnable{
 

@@ -1,4 +1,4 @@
-package com.danke.engine.gfx;
+package com.engine.gfx;
 
 import java.awt.image.BufferedImage;
 

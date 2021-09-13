@@ -1,7 +1,7 @@
-package com.danke.game;
+package com.game;
 
-import com.danke.engine.GameContainer;
-import com.danke.engine.Renderer;
+import com.engine.GameContainer;
+import com.engine.Renderer;
 
 //every object is going to implement this interface
 public interface GameObject {
