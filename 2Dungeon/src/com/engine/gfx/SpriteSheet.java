@@ -32,7 +32,7 @@ public class SpriteSheet extends Sprite {
 
 		int[] spritePixels = new int[spriteWidth*spriteHeight];
 		
-		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
 		image.setRGB(0, 0, this.getWidth(), this.getHeight(), this.getPixels(), 0, this.getWidth());
 		
 		for(int y = 0; y<this.getHeight(); y += spriteHeight) {
