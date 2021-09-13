@@ -1,2 +1,2 @@
 # Java-Game-Engine
-simple java game engine made out of a youtube tutorial
+Goal of this project is to implement a java game engine (mostly based on youtube tutorials). Also, this project is supposed to help develope better java language skills.
