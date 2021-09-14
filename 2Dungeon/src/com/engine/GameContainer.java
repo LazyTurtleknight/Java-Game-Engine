@@ -1,5 +1,10 @@
 package com.engine;
 
+/*
+ * GameContainer class which contains all necessary objects to run a window, 
+ * instantiating them and defining the main run loop (update and render).  
+ */
+
 public class GameContainer implements Runnable{
 
     private Thread thread;
@@ -20,6 +25,7 @@ public class GameContainer implements Runnable{
 
     }
     
+    // instantiates the private members and calls the run function
     public void start(){
 
         window = new Window(this);
@@ -30,17 +36,21 @@ public class GameContainer implements Runnable{
         thread.run();
     }
 
-    //TODO
+    //TODO:
     public void stop(){
        
     }
+    
+    /*
+     * "Main" function defining game loop of updating and rendering objects.
+     */
 
     public void run(){
 
         running = true;
 
         boolean render = false;
-        // keep track of time for fps
+        //keep track of time for fps
         double currentTime = 0;
         double lastTime = System.nanoTime() / 1000000000.0;
         double passedTime = 0;
@@ -50,8 +60,11 @@ public class GameContainer implements Runnable{
 
             render = false;
             
-            //"The value returned represents nanoseconds since some fixed but arbitrary origin time (perhaps in the future, so values may be negative)."
-            //TODO: investigate if this causes problems
+            /*
+             * "The value returned represents nanoseconds since some fixed but 
+             * arbitrary origin time (perhaps in the future, so values may be negative)."
+             * TODO: investigate if this causes problems
+             */
             currentTime = System.nanoTime() / 1000000000.0;
             
             //time that passed between this and the previous loop
@@ -70,7 +83,6 @@ public class GameContainer implements Runnable{
 
                 unprocessedTime -= UPDATE_CAP;
                 render = true;
-                //System.out.println(input.getScroll()); 
                 
                 //update
                 game.update(this, (float) UPDATE_CAP);

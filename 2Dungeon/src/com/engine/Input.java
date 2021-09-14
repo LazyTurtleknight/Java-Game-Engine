@@ -8,6 +8,10 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
+/*
+ * Class to process inputs (e.g. is a button X pressed).
+ */
+
 public class Input implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener{
 
 	// may not be necessary
@@ -35,6 +39,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener, M
 	// 1 scrolling up, 0 not scrolling, -1 scrolling down and abs indicates how much
 	private int scroll;
 	
+	//instantiate listeners
 	public Input(GameContainer gamecon) {
 		this.gamecon = gamecon;
 		mouseX = 0;

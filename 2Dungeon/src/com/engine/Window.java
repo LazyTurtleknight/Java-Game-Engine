@@ -8,6 +8,9 @@ import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
 
+/*
+ * Windows class contains a canvas to draw to and defines the BufferStrategy.
+ */
 
 public class Window{
 
@@ -44,8 +47,6 @@ public class Window{
         buffstrat = canvas.getBufferStrategy();
         graphic = buffstrat.getDrawGraphics();
 
-
-
     }
 
     public void update(){
@@ -53,12 +54,7 @@ public class Window{
         // draws image to canvas (actually to buffstrat attached to canvas)
         graphic.drawImage(image, 0, 0, canvas.getWidth(), canvas.getHeight(), null);
         buffstrat.show();
-
-
-
-
-
-
+        
     }
 
 
