@@ -5,6 +5,9 @@ import com.engine.Renderer;
 import com.engine.gfx.Sprite;
 import com.engine.gfx.SpriteAnimation;
 
+/*
+ * Prototype player class.
+ */
 public class Player extends BasicCharacter{
 	
 	private SpriteAnimation jumpAnimation;
@@ -29,6 +32,7 @@ public class Player extends BasicCharacter{
 		
 		//this determines how fast the animation is
 		this.incrementDelta(gamecon.getUPDATE_CAP());
+		
 		if(this.getDelta() > this.getIdleAnimation().getNumberOfFrames()) {
 			this.setDelta(0);
 		}

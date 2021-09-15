@@ -5,6 +5,11 @@ import com.engine.Renderer;
 import com.engine.gfx.Sprite;
 import com.engine.gfx.SpriteAnimation;
 
+/*
+ * A basic character class that defines a couple of necessary properties 
+ * like the position and animation for different states.
+ * TODO: expand this base class
+ */
 public class BasicCharacter implements GameObject {
 
 	private int offsetX;
@@ -28,6 +33,7 @@ public class BasicCharacter implements GameObject {
 		
 	}
 
+	// part of the GameObject interface
 	public void render(Renderer renderer, int zoomX, int zoomY) {
 		
 	}
@@ -37,19 +43,19 @@ public class BasicCharacter implements GameObject {
 	}
 	
 	public void moveUp(int steps) {
-		offsetY-=steps;
+		offsetY -= steps;
 	}
 
 	public void moveDown(int steps) {
-		offsetY+=steps;
+		offsetY += steps;
 	}
 
 	public void moveRight(int steps) {
-		offsetX+=steps;
+		offsetX += steps;
 	}
 	
 	public void moveLeft(int steps) {
-		offsetX-=steps;
+		offsetX -= steps;
 	}
 	
 	public void incrementDelta(double inc) {

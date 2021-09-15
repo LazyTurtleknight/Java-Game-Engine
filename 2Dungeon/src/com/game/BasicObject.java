@@ -2,7 +2,12 @@ package com.game;
 
 import com.engine.gfx.Sprite;
 
+/*
+ * A basic object class that defines a couple of necessary properties like the position.
+ * TODO: expand this base class
+ */
 public class BasicObject {
+	
 	private int offsetX;
 	private int offsetY;
 	private Sprite sprite;
