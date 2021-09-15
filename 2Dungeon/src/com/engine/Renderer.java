@@ -9,8 +9,13 @@ import com.engine.gfx.Font;
 import com.engine.gfx.Sprite;
 import com.engine.gfx.SpriteAnimation;
 
+/*
+ * Class that defines how object are rendered.
+ */
+
 public class Renderer{
 
+	// width and height of window from game container
     private int pixelWidth, pixelHeight;
     private int[] pixels;
     
@@ -27,11 +32,14 @@ public class Renderer{
         pixelWidth = gamecon.getWidth();
         pixelHeight = gamecon.getHeight();
 
-        //Window
-        //bufferedImage
-        //WritableRaster -> extends Raster and provides pixel writing
-        //databuffer of raster
-        //int[] reference to buffered pix array
+        /*
+         *Instance type after each get function:
+         *Window
+         *BufferedImage
+         *WritableRaster -> extends Raster and provides pixel writing
+         *databuffer of raster
+         *int[] reference to buffered pix array
+         */
         pixels =  ((DataBufferInt)gamecon.getWindow().getImage().getRaster().getDataBuffer()).getData();
         zbuffer = new int[pixels.length];
         // default font
@@ -47,16 +55,19 @@ public class Renderer{
         }
     }
     
-    // value is 4 byte int (ARGB color) where 1. byte is alpha, 2.byte red, 3. byte green, 4. byte blue
+    /*
+     * int x: x coordinate
+     * int y: y coordinate
+     * int value: (4 byte) int ARGB color where 1. byte is alpha, 2.byte red, 3. byte green, 4. byte blue
+     */
     public void setPixel(int x, int y, int value) {
     	
     	//value gets shifted to the right by 24 bits
     	//preserving the sign
-    	//0xff is an int literal: 00 00 00 ff
-    	//after bitwise AND
     	//result is positive int of the 8 most significant bits in value (before the shift)
     	int alpha = (value >> 24) & 0xff;
     	
+    	// simple skip condition when we do not need to set a pixel's value
     	if(x < 0 || x >= pixelWidth || y < 0 ||  y >= pixelHeight || alpha == 0) {
     		
     		return;
@@ -97,7 +108,6 @@ public class Renderer{
     	
     	//if only parts of the image are outside of the window 
     	//calculate new width and height to skip unnecessary setPixel(...) function calls
-    	//TODO: more clarification of how this works ?
     	int newX = 0;
     	int newY = 0;
     	int newWidth = image.getWidth();
@@ -159,8 +169,10 @@ public class Renderer{
     	}
     }
     
-    //parameter image is a sprite animation containing multiple sprites in a grid
-    //parameter spriteID is the ID of the sprite in the sprite array
+    /*
+     * SpriteAnimation image: sprite animation containing multiple sprites in a grid
+     * int spriteID: ID of the sprite in the sprite array
+     */
     public void drawSpriteAnimation(SpriteAnimation image, int offsetX, int offsetY, int spriteID) {
     	//if the image would be outside of the window
     	if(offsetX < -image.getSpriteWidth() || offsetY < -image.getSpriteHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {
@@ -208,8 +220,11 @@ public class Renderer{
     	}	
     }
     
-    //parameter image is a sprite animation containing multiple sprites in a grid
-    //parameter spriteX and spriteY specify the coordinates of the sprite in the grid
+    /*
+     * SpriteAnimation image: sprite animation containing multiple sprites in a grid
+     * int spriteX: x coordinates of the sprite in the grid
+     * int spriteY: y coordinates of the sprite in the grid
+     */
     public void drawSpriteAnimation(SpriteAnimation image, int offsetX, int offsetY, int spriteX, int spriteY) {
     	//if the image would be outside of the window
     	if(offsetX < -image.getSpriteWidth() || offsetY < -image.getSpriteHeight() || offsetX > pixelWidth || offsetY > pixelHeight) {
@@ -257,7 +272,7 @@ public class Renderer{
     	}	
     }
     
-    //draw a simple rectangle
+    //draw a rectangle
     //TODO: add check if rectangle is in window
     public void drawRect(int offsetX, int offsetY, int width, int height, int color) {
   
@@ -275,7 +290,7 @@ public class Renderer{
     }
 
   
-    //only draws vertical or horizontal lines
+    // draws vertical or horizontal lines
     public void drawStraightLine(int offsetX, int offsetY, int endpointX, int endpointY, int color) {
     	
     	//check if the points lie on a vertical or horizontal line
