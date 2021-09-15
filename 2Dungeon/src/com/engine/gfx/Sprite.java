@@ -5,11 +5,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/*
+ * Sprite class to load images from a given location.
+ */
 public class Sprite {
 
 	private int width, height;
 	private int[] pixels;
 	
+	//constructors
+	
+	//constructor to read from a given file path
 	public Sprite(String path) {
 		
 		BufferedImage image = null;
@@ -24,21 +30,20 @@ public class Sprite {
 		height = image.getHeight();
 		pixels = image.getRGB(0, 0, width, height, null, 0, width);
 		
-		//TODO: what does this do?
 		image.flush();
 	}
 	
+	//constructor to read from a given BufferedImage
 	public Sprite(BufferedImage image) {
 		
 		width = image.getWidth();
 		height = image.getHeight();
 		pixels = image.getRGB(0, 0, width, height, null, 0, width);
 		
-		//TODO: what does this do?
 		image.flush();
 	}
 	
-	//TODO: one of these two constructor is probably superfluous
+	//constructor to read from a given pixel array
 	public Sprite(int[] pixels, int width, int height) {
 		
 		this.width = width;
@@ -47,6 +52,7 @@ public class Sprite {
 		
 	}
 
+	//copy constructor
 	public Sprite(Sprite sprite) {
 		
 		width = sprite.getWidth();

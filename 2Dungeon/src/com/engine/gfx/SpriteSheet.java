@@ -2,6 +2,9 @@ package com.engine.gfx;
 
 import java.awt.image.BufferedImage;
 
+/*
+ * Class to handle a sheet of sprites.
+ */
 public class SpriteSheet extends Sprite {
 	
 	//width and height of the individual sprites in the sheet
@@ -10,6 +13,9 @@ public class SpriteSheet extends Sprite {
 
 	private Sprite[] loadedSprites = null;
 	
+	//constructors
+	
+	//constructor when given a file path
 	public SpriteSheet(String path, int spriteWidth, int spriteHeight) {
 		super(path);
 		this.spriteWidth = spriteWidth;
@@ -17,6 +23,7 @@ public class SpriteSheet extends Sprite {
 		
 	}
 
+	//constructor when given a sprite
 	public SpriteSheet(Sprite sprite, int spriteWidth, int spriteHeight) {
 		super(sprite);
 		this.spriteWidth = spriteWidth;
@@ -24,6 +31,7 @@ public class SpriteSheet extends Sprite {
 			
 	}
 	
+	//helper function to load sprites from the sprite sheet into a sprite array (loadedSprites member)
 	public void loadSprites() {
 
 		loadedSprites = new Sprite[(this.getWidth()/spriteWidth)*(this.getHeight()/spriteHeight)];
@@ -46,6 +54,7 @@ public class SpriteSheet extends Sprite {
 		}	
 	}
 
+	//getter and setter
 	public int getSpriteWidth() {
 		return spriteWidth;
 	}
