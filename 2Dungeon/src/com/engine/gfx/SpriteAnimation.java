@@ -5,32 +5,32 @@ package com.engine.gfx;
  */
 
 public class SpriteAnimation extends SpriteSheet {
-	
-	private int numberOfFrames;
 
-	//loads an image of multiple sprites that form an animation
-	public SpriteAnimation(String path, int spriteWidth, int spriteHeight) {
-		super(path, spriteWidth, spriteHeight);
+  private int numberOfFrames;
 
-		//check if the given width and height divide the width and height of the image
-		if(this.getHeight() % spriteHeight == 0 & this.getWidth() % spriteWidth == 0) {
-			
-			this.numberOfFrames = this.getHeight()/spriteHeight * this.getWidth()/spriteWidth;
-		}else {
-			
-			//TODO: implement appropriate error handling
-		}
-		
-		
-	}
-	
-	//getter and setter
-	public int getNumberOfFrames() {
-		return numberOfFrames;
-	}
+  //loads an image of multiple sprites that form an animation
+  public SpriteAnimation(String path, int spriteWidth, int spriteHeight) {
+    super(path, spriteWidth, spriteHeight);
 
-	public void setNumberOfFrames(int numberOfFrames) {
-		this.numberOfFrames = numberOfFrames;
-	}
-	
+    //check if the given width and height divide the width and height of the image
+    if(this.getHeight() % spriteHeight == 0 & this.getWidth() % spriteWidth == 0) {
+
+      this.numberOfFrames = this.getHeight()/spriteHeight * this.getWidth()/spriteWidth;
+    }else {
+
+      //TODO: implement appropriate error handling
+    }
+
+
+  }
+
+  //getter and setter
+  public int getNumberOfFrames() {
+    return numberOfFrames;
+  }
+
+  public void setNumberOfFrames(int numberOfFrames) {
+    this.numberOfFrames = numberOfFrames;
+  }
+
 }

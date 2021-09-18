@@ -8,9 +8,9 @@ import com.engine.Renderer;
  */
 public abstract interface GameObject {
 
-	//used to render an object
-	public void render(Renderer renderer, int zoomX, int zoomY);
-	
-	//used to update the state of an object
-	public void update(GameContainer game);
+  //used to render an object
+  public void render(Renderer renderer, int zoomX, int zoomY);
+
+  //used to update the state of an object
+  public void update(GameContainer game);
 }

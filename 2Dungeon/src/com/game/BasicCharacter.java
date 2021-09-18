@@ -1,12 +1,10 @@
 package com.game;
 
 import static com.game.Constants.IDLE;
-
 import static com.game.Constants.IMAGES_CYBER;
 import static com.game.Constants.RUN;
 
 import java.io.File;
-
 import com.engine.GameContainer;
 import com.engine.Renderer;
 import com.engine.gfx.SpriteAnimation;

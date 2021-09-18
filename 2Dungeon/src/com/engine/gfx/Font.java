@@ -10,48 +10,48 @@ package com.engine.gfx;
 
 public class Font {
 
-	private Sprite fontImage;
-	private int[] offsets;
-	private int[] widths;
-	
-	
-	public Font(String path) {
-		
-		fontImage = new Sprite(path);
-		offsets = new int[256];
-		widths = new int[256];
-		int unicode  = 0;
-		
-		for(int i = 0; i < fontImage.getWidth(); i++) {
-			
-			//if the pixel is blue (0xff0000ff) then a new symbol stars
-			if(fontImage.getPixels()[i] == 0xff0000ff) {
-				
-				offsets[unicode] = i;
-			}
-			
-			//if the pixel is yellow (0xffffff00) then a symbol ends
-			if(fontImage.getPixels()[i] == 0xffffff00) {
-				
-				widths[unicode] = i - offsets[unicode];
-				unicode++;
-			}
-		}
-	}
+  private Sprite fontImage;
+  private int[] offsets;
+  private int[] widths;
 
 
-	// getter and setter
-	public Sprite getFontImage() {
-		return fontImage;
-	}
+  public Font(String path) {
+
+    fontImage = new Sprite(path);
+    offsets = new int[256];
+    widths = new int[256];
+    int unicode  = 0;
+
+    for(int i = 0; i < fontImage.getWidth(); i++) {
+
+      //if the pixel is blue (0xff0000ff) then a new symbol stars
+      if(fontImage.getPixels()[i] == 0xff0000ff) {
+
+        offsets[unicode] = i;
+      }
+
+      //if the pixel is yellow (0xffffff00) then a symbol ends
+      if(fontImage.getPixels()[i] == 0xffffff00) {
+
+        widths[unicode] = i - offsets[unicode];
+        unicode++;
+      }
+    }
+  }
 
 
-	public int[] getOffsets() {
-		return offsets;
-	}
+  // getter and setter
+  public Sprite getFontImage() {
+    return fontImage;
+  }
 
 
-	public int[] getWidths() {
-		return widths;
-	}
+  public int[] getOffsets() {
+    return offsets;
+  }
+
+
+  public int[] getWidths() {
+    return widths;
+  }
 }
