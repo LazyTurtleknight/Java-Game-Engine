@@ -12,6 +12,10 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/*
+ * Class to load and play soundtracks.
+ */
+
 public class Soundtrack {
 
 	//clip is a special data line where data is pre-loaded enabling start at any position in its audio data
