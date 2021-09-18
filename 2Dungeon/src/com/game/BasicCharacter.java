@@ -1,8 +1,14 @@
 package com.game;
 
+import static com.game.Constants.IDLE;
+
+import static com.game.Constants.IMAGES_CYBER;
+import static com.game.Constants.RUN;
+
+import java.io.File;
+
 import com.engine.GameContainer;
 import com.engine.Renderer;
-import com.engine.gfx.Sprite;
 import com.engine.gfx.SpriteAnimation;
 
 /*
@@ -14,7 +20,6 @@ public class BasicCharacter implements GameObject {
 
 	private int offsetX;
 	private int offsetY;
-	private Sprite sprite;
 	private String name;
 	
 	//used to determine which animation has to used
@@ -25,12 +30,25 @@ public class BasicCharacter implements GameObject {
 	private SpriteAnimation runAnimation;
 	private SpriteAnimation hitAnimation;
 
-	public BasicCharacter(Sprite sprite, int offsetX, int offsetY) {
+	public BasicCharacter(String name, int offsetX, int offsetY, int spriteWidth, int spriteHeight) {
 		
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
-		this.sprite = sprite;
+		this.setName(name);
 		
+		String path =  IMAGES_CYBER + File.separator + name;
+		File file = new File(path);
+	
+		//TODO: check beforehand if this directory and files exists
+		SpriteAnimation animation = null;
+	
+		animation = new SpriteAnimation(file.getPath() + File.separator + name + IDLE, spriteWidth, spriteHeight);
+		animation.loadSprites();
+		this.setIdleAnimation(animation);
+	
+	
+		animation = new SpriteAnimation(file.getPath() + File.separator + name + RUN, spriteWidth, spriteHeight);
+		animation.loadSprites();
+		this.setRunAnimation(animation);
+
 	}
 
 	// part of the GameObject interface
@@ -77,10 +95,6 @@ public class BasicCharacter implements GameObject {
 
 	public void setOffsetY(int offsetY) {
 		this.offsetY = offsetY;
-	}
-
-	public Sprite getSprite() {
-		return sprite;
 	}
 
 	public String getName() {
@@ -130,4 +144,5 @@ public class BasicCharacter implements GameObject {
 	public void setDelta(int delta) {
 		this.delta = delta;
 	}
+
 }
