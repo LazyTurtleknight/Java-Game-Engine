@@ -16,7 +16,12 @@ public class SpriteSheet extends Sprite {
 
   //constructors
 
-  //constructor when given a file path
+  /*
+   * Constructor to read from a file path.
+   * @param path file path to read from
+   * @param spriteWidth width of single sprite
+   * @param spriteHeight height of single sprite
+   */
   public SpriteSheet(String path, int spriteWidth, int spriteHeight) {
     super(path);
     this.spriteWidth = spriteWidth;
@@ -24,7 +29,12 @@ public class SpriteSheet extends Sprite {
 
   }
 
-  //constructor when given a sprite
+  /*
+   * Constructor when given a sprite.
+   * @param sprite to read from
+   * @param spriteWidth width of single sprite
+   * @param spriteHeight height of single sprite
+   */
   public SpriteSheet(Sprite sprite, int spriteWidth, int spriteHeight) {
     super(sprite);
     this.spriteWidth = spriteWidth;
@@ -32,7 +42,10 @@ public class SpriteSheet extends Sprite {
 
   }
 
-  //helper function to load sprites from the sprite sheet into a sprite array (loadedSprites member)
+  /*
+   * Helper function to load sprites from the sprite sheet into a sprite array (loadedSprites member).
+   * 
+   */
   public void loadSprites() {
 
     loadedSprites = new Sprite[(this.getWidth()/spriteWidth)*(this.getHeight()/spriteHeight)];

@@ -15,6 +15,10 @@ public class Font {
   private int[] widths;
 
 
+  /*
+   * Constructor.
+   * @param path file path to read font from
+   */
   public Font(String path) {
 
     fontImage = new Sprite(path);

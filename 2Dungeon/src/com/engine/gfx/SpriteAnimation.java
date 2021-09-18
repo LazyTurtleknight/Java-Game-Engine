@@ -8,7 +8,12 @@ public class SpriteAnimation extends SpriteSheet {
 
   private int numberOfFrames;
 
-  //loads an image of multiple sprites that form an animation
+  /*
+   * Constructor to load an image of multiple sprites that form an animation.
+   * @param path file path to read from
+   * @param spriteWidth width of a single sprite
+   * @param spriteHeight height of single sprite
+   */
   public SpriteAnimation(String path, int spriteWidth, int spriteHeight) {
     super(path, spriteWidth, spriteHeight);
 

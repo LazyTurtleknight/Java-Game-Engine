@@ -22,6 +22,10 @@ public class Soundtrack {
   private Clip clip;
   private FloatControl gainControl;
 
+  /*
+   * Constructor.
+   * @param path file path to read from
+   */
   public Soundtrack(String path){
     try {
 
@@ -49,6 +53,9 @@ public class Soundtrack {
     }
   }
 
+  /*
+   * Play the loaded soundtrack.
+   */
   public void play() {
     if(clip == null) {
       return;
@@ -60,6 +67,9 @@ public class Soundtrack {
     }
   }
 
+  /*
+   * Stop playing the loaded soundtrack.
+   */
   public void stop() {
     if(clip.isRunning()) {
       clip.stop();

@@ -16,7 +16,10 @@ public class Sprite {
 
   //constructors
 
-  //constructor to read from a given file path
+  /*
+   * Constructor to read from a given file path.
+   * @param path file path to read from
+   */
   public Sprite(String path) {
 
     BufferedImage image = null;
@@ -34,7 +37,10 @@ public class Sprite {
     image.flush();
   }
 
-  //constructor to read from a given BufferedImage
+  /*
+   * Constructor to read from a given BufferedImage.
+   * @param image buffered image to read from
+   */
   public Sprite(BufferedImage image) {
 
     width = image.getWidth();
@@ -44,7 +50,12 @@ public class Sprite {
     image.flush();
   }
 
-  //constructor to read from a given pixel array
+  /*
+   * Constructor to read from a given pixel array.
+   * @param pixels array to read from
+   * @param width width of a sprite in array
+   * @param height height of sprite in array
+   */
   public Sprite(int[] pixels, int width, int height) {
 
     this.width = width;
@@ -53,7 +64,10 @@ public class Sprite {
 
   }
 
-  //copy constructor
+  /*
+   * Copy constructor.
+   * @param sprite sprite to copy
+   */
   public Sprite(Sprite sprite) {
 
     width = sprite.getWidth();

@@ -28,6 +28,14 @@ public class BasicCharacter implements GameObject {
 	private SpriteAnimation runAnimation;
 	private SpriteAnimation hitAnimation;
 
+	/*
+	 * Constructor.
+	 * @param name name of character used to find and read corresponding sprites
+	 * @param offsetX x coordinate of start location
+	 * @param offsetY y coordinate of start location
+	 * @param spriteWidth width of single sprite used to read from files
+	 * @param spriteHeight height of single sprite used to read form files
+	 */
 	public BasicCharacter(String name, int offsetX, int offsetY, int spriteWidth, int spriteHeight) {
 		
 		this.setName(name);

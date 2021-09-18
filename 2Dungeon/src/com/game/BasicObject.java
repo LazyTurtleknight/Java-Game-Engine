@@ -14,6 +14,12 @@ public class BasicObject {
   private Boolean indistructable = true;
   private Boolean immovable = true;
 
+  /*
+   * Constructor.
+   * @param name name of object used to find and read corresponding sprites
+   * @param offsetX x coordinate of start location
+   * @param offsetY y coordinate of start location
+   */
   public BasicObject(String name, int offsetX, int offsetY) {
 
     this.offsetX = offsetX;
