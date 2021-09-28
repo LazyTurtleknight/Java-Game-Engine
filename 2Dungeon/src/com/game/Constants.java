@@ -18,5 +18,8 @@ public final class Constants {
   public static final String IDLE = "_idle.png";
   public static final String RUN = "_run.png";
   public static final String JUMP = "_jump.png";
+  
+  //used to identify directory for character resource files
+  public static final String BIKER = "Biker";
 
 }
